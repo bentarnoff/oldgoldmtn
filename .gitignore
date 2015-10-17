@@ -1,0 +1,4 @@
+*.pyc
+other
+tmp
+.DS_Store
