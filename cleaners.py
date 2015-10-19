@@ -3,15 +3,16 @@ import requests
 import json
 import re
 import os
+import string
 
 def clean_title(title):
-	cleanup = {"]":"", "[":"", ".":"", "graphic":""}
-	for i, j in cleanup.iteritems():
-		title = title.replace(i, j)
+	fun = string.letters + " "
+	title = re.sub("[^%s]" % fun, "", title)
+	title = re.sub("\W+graphic", "", title)
 	return title.rstrip()
 
 def clean_date(date):
-	if date == "[n.d.]":
+	if date == "[n.d.]" or date.startswith("[19--"):
 		return "undated"
 	else:
 		date = re.sub("\D", "", date)
